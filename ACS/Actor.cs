@@ -18,7 +18,7 @@ namespace ACS
 			components = new List<IComponent>();
 		}
 
-		public TComponent AddComponent<TComponent>() where TComponent : IComponent, new()
+		public TComponent AddComponent<TComponent>() where TComponent : class, IComponent, new()
 		{
 			var component = context.GetOrCreateComponent<TComponent>();
 			components.Add(component);

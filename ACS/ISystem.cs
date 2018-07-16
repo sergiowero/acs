@@ -1,11 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace ACS
 {
-	public interface ISystem
+	public abstract class System
 	{
-		void OnUpdate();
+		protected readonly Context context;
+
+		public System(Context context)
+		{
+			this.context = context;
+		}
+
+		protected IEnumerable<Actor> GetActors<TMeta>() where TMeta : struct
+		{
+			return Enumerable.Empty<Actor>();
+		}
+
+		protected abstract void OnUpdate();
+
+		public void Update()
+		{
+			OnUpdate();
+		}
 	}
 }

@@ -13,7 +13,7 @@ namespace ACS
 		private static Context context;
 
 		private readonly List<Actor> actors;
-		private readonly List<ISystem> systems;
+		private readonly List<System> systems;
 		private readonly Dictionary<Type, IComponentPool> pools;
 
 		private int actorIdCounter;
@@ -34,7 +34,7 @@ namespace ACS
 		{
 			actorIdCounter = 0;
 			actors = new List<Actor>();
-			systems = new List<ISystem>();
+			systems = new List<System>();
 			pools = new Dictionary<Type, IComponentPool>();
 		}
 
@@ -44,12 +44,12 @@ namespace ACS
 			systems.Clear();
 		}
 
-		public void AddSystem(ISystem system)
+		public void AddSystem(System system)
 		{
 			systems.Add(system);
 		}
 
-		public void RemoveSystem(ISystem system)
+		public void RemoveSystem(System system)
 		{
 			systems.Remove(system);
 		}
@@ -70,11 +70,11 @@ namespace ACS
 		{
 			for (int i = 0 ; i < systems.Count ; i++)
 			{
-				systems[i].OnUpdate();
+				systems[i].Update();
 			}
 		}
 
-		internal TComponent GetOrCreateComponent<TComponent>() where TComponent : IComponent, new()
+		internal TComponent GetOrCreateComponent<TComponent>() where TComponent : class, IComponent, new()
 		{
 			if (pools.TryGetValue(typeof(TComponent), out IComponentPool pool))
 			{

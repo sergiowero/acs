@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace ACS
 {
@@ -10,7 +8,7 @@ namespace ACS
 		void Put(IComponent component);
 	}
 
-	public class ComponentPool<TComponent> : IComponentPool where TComponent : IComponent, new()
+	public class ComponentPool<TComponent> : IComponentPool where TComponent : class, IComponent, new()
 	{
 		private readonly List<TComponent> pool;
 		private readonly int capacity;
