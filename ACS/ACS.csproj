@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject />
+    <Version>0.0.1</Version>
+    <Authors>Sergio Sanchez</Authors>
+    <Company>UAG</Company>
+    <Description>Actor Component Systems. Architecture for videogames.</Description>
+    <Copyright>2018</Copyright>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>unity games</PackageTags>
+    <NeutralLanguage>en</NeutralLanguage>
+  </PropertyGroup>
+
+</Project>
