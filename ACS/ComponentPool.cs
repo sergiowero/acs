@@ -8,7 +8,7 @@ namespace ACS
 		void Put(IComponent component);
 	}
 
-	public class ComponentPool<TComponent> : IComponentPool where TComponent : class, IComponent, new()
+	internal class ComponentPool<TComponent> : IComponentPool where TComponent : class, IComponent, new()
 	{
 		private readonly List<TComponent> pool;
 		private readonly int capacity;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ACS.Events;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,69 +9,86 @@ namespace ACS
 	{
 
 		public int ActorCount { get { return actors.Count; } }
+		public float DeltaTime { get; private set; }
+		public EventSystem Eventsystem { get; }
 
 		private const int DEFAULT_POOL_CAPACITY = 10;
-		private static Context context;
 
 		private readonly List<Actor> actors;
-		private readonly List<System> systems;
+		private readonly List<BaseSystem> systems;
 		private readonly Dictionary<Type, IComponentPool> pools;
-
 		private int actorIdCounter;
 
-		public static Context Instance
-		{
-			get
-			{
-				if (context == null)
-				{
-					context = new Context();
-				}
-				return context;
-			}
-		}
-
-		private Context()
+		public Context()
 		{
 			actorIdCounter = 0;
 			actors = new List<Actor>();
-			systems = new List<System>();
+			systems = new List<BaseSystem>();
 			pools = new Dictionary<Type, IComponentPool>();
+			Eventsystem = new EventSystem(this);
+			AddSystem(Eventsystem);
 		}
 
-		public void CleanUp()
+		public void Destroy()
 		{
-			actors.Clear();
-			systems.Clear();
+			for (int i = actors.Count - 1 ; i >= 0 ; i--)
+			{
+				var actor = actors[i];
+				actors.RemoveAt(i);
+				actor.RemoveAllComponents();
+				actor.OnComponentAdded -= OnActorComponentAdded;
+				actor.OnComponentRemoved -= OnActorComponentRemoved;
+			}
+
+			for (int i = systems.Count - 1 ; i >= 0 ; i--)
+			{
+				var system = systems[i];
+				system.Clean();
+				systems.RemoveAt(i);
+			}
 		}
 
-		public void AddSystem(System system)
+		public void AddSystem(BaseSystem system)
 		{
 			systems.Add(system);
+			foreach (var actor in actors)
+			{
+				system.ProccessActor(actor);
+			}
 		}
 
-		public void RemoveSystem(System system)
+		public void RemoveSystem(BaseSystem system)
 		{
 			systems.Remove(system);
+			system.Clean();
 		}
 
 		public Actor CreateActor()
 		{
 			var actor = new Actor(++actorIdCounter, this);
 			actors.Add(actor);
+			actor.OnComponentAdded += OnActorComponentAdded;
+			actor.OnComponentRemoved += OnActorComponentRemoved;
 			return actor;
 		}
 
 		private void RemoveActor(Actor actor)
 		{
 			actors.Remove(actor);
+			actor.RemoveAllComponents();
+			actor.OnComponentAdded -= OnActorComponentAdded;
+			actor.OnComponentRemoved -= OnActorComponentRemoved;
 		}
 
-		public void Update()
+		public void Update(float deltaTime)
 		{
+			this.DeltaTime = deltaTime;
 			for (int i = 0 ; i < systems.Count ; i++)
 			{
-				systems[i].Update();
+				if (systems[i].enabled)
+				{
+					systems[i].Update();
+				}
 			}
 		}
 
@@ -93,6 +111,22 @@ namespace ACS
 			if (pools.TryGetValue(component.GetType(), out IComponentPool pool))
 			{
 				pool.Put(component);
+			}
+		}
+
+		private void OnActorComponentAdded(Actor actor, IComponent component)
+		{
+			foreach (var sys in systems)
+			{
+				sys.ProccessActor(actor);
+			}
+		}
+
+		private void OnActorComponentRemoved(Actor actor, IComponent component)
+		{
+			foreach (var sys in systems)
+			{
+				sys.ProccessActor(actor);
 			}
 		}
 	}
