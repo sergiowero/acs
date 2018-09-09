@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "ACS.CLI": {
+      "commandName": "Project"
+    }
+  }
+}

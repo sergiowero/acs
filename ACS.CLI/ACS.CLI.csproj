@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <Description>Actor component system command line line interface</Description>
+    <PackageProjectUrl>https://github.com/sergiowero/acs</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sergiowero/acs</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <Authors>Sergio Sanchez</Authors>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <Copyright>2018</Copyright>
+    <ApplicationIcon />
+    <StartupObject>ACS.CLI.Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ACS\ACS.csproj" />
+  </ItemGroup>
+
+</Project>

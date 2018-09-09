@@ -10,7 +10,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestApp", "TestApp\TestApp.
 		{8E6337EC-818C-4650-AF37-D5BC89FD47BF} = {8E6337EC-818C-4650-AF37-D5BC89FD47BF}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ACS.CLI", "..\ACS.CLI\ACS.CLI\ACS.CLI.csproj", "{FE3D5970-BEDE-4A7A-9C90-319E4D839268}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ACS.CLI", "ACS.CLI\ACS.CLI.csproj", "{8A2BAF92-BA7A-40F8-9FD9-4A2B47BC976B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{8E6337EC-818C-4650-AF37-D5BC89FD47BF} = {8E6337EC-818C-4650-AF37-D5BC89FD47BF}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +29,10 @@ Global
 		{7E00E389-981B-4F28-9E17-AD3752444422}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E00E389-981B-4F28-9E17-AD3752444422}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E00E389-981B-4F28-9E17-AD3752444422}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FE3D5970-BEDE-4A7A-9C90-319E4D839268}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE3D5970-BEDE-4A7A-9C90-319E4D839268}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE3D5970-BEDE-4A7A-9C90-319E4D839268}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE3D5970-BEDE-4A7A-9C90-319E4D839268}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A2BAF92-BA7A-40F8-9FD9-4A2B47BC976B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A2BAF92-BA7A-40F8-9FD9-4A2B47BC976B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A2BAF92-BA7A-40F8-9FD9-4A2B47BC976B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A2BAF92-BA7A-40F8-9FD9-4A2B47BC976B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
